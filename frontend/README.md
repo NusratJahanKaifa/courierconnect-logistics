@@ -111,7 +111,7 @@ API documentation: http://127.0.0.1:8000/docs
 4. Configure the API base URL:
 
    ```env
-   VITE_API_BASE_URL=http://127.0.0.1:8000
+   VITE_API_BASE_URL=https://courierconnect-logistics.onrender.com
    ```
 
    For the deployed frontend, configure the API base URL to point to the deployed backend.

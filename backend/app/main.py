@@ -18,8 +18,16 @@ app = FastAPI(
     description="API for courier and parcel management",
     version="1.0.0",
 )
-
-
+from fastapi.middleware.cors import CORSMiddleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://comforting-axolotl-d296aa.netlify.app"
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 def get_allowed_origins() -> list[str]:
     origins = os.getenv(
         "FRONTEND_URL",
