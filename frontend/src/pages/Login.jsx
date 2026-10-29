@@ -21,7 +21,7 @@ function Login() {
       formData.append('username', email.trim())
       formData.append('password', password)
 
-      const response = await fetch('http://127.0.0.1:8000/auth/login', {
+      const response = await fetch('https://courierconnect-logistics.onrender.com/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: formData,
@@ -35,7 +35,7 @@ function Login() {
 
       localStorage.setItem('access_token', data.access_token)
 
-      const userResponse = await fetch('http://127.0.0.1:8000/auth/me', {
+      const userResponse = await fetch('https://courierconnect-logistics.onrender.com/auth/me', {
         headers: { Authorization: `Bearer ${data.access_token}` },
       })
 

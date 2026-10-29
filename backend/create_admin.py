@@ -15,9 +15,10 @@ def create_admin():
         existing_user = db.query(User).filter(
             User.email == email
         ).first()
-
         if existing_user:
-            print("This email is already registered.")
+            existing_user.role = "admin"
+            db.commit()
+            print("Existing account is now an admin.")
             return
 
         name = input("Admin name: ").strip()

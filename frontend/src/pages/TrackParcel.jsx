@@ -10,9 +10,7 @@ import {
   FaCalendarDays,
   FaWeightHanging,
 } from 'react-icons/fa6'
-
-const API_BASE_URL = 'http://127.0.0.1:8000'
-
+const API_BASE_URL = 'https://courierconnect-logistics.onrender.com'
 const STATUS_STYLES = {
   pending: 'bg-amber-50 text-amber-700 ring-amber-200',
   'picked up': 'bg-cyan-50 text-cyan-700 ring-cyan-200',

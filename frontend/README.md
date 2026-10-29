@@ -1,42 +1,24 @@
 # CourierConnect — Courier & Logistics Management Platform
 
-A courier and logistics management platform built with React, Vite, Tailwind CSS, FastAPI, SQLAlchemy, and SQLite. The system provides parcel booking, shipment tracking, user authentication, and role-based access for regular users and administrators.
+CourierConnect is a courier and logistics management platform built with **React** and **FastAPI**. It allows users to register, book and track parcels, and manage deliveries. Administrators have additional access to manage parcels and users.
+
+## Live Demo
+
+- **Frontend:** https://comforting-axolotl-d296aa.netlify.app/
+- **Backend API:** https://courierconnect-logistics.onrender.com
+- **API Documentation:** https://courierconnect-logistics.onrender.com/docs
+- **GitHub Repository:** https://github.com/NusratJahanKaifa/courierconnect-logistics
 
 ## Features
 
-### Authentication & Security
 - User registration and login
-- Password hashing
 - JWT-based authentication
-- Role-based access control for users and administrators
-- Protected frontend routes
-- Session expiration handling
-- Forgot-password and reset-password flow
-
-### Parcel Management
-- Book new parcels
-- Generate unique tracking numbers
-- View parcel details
-- Update parcel information
-- Track shipment status
-- Public parcel tracking
-- Search and filter parcels
-- Sort and paginate parcel lists
-- Admin-only parcel deletion
-
-### User Management
-- Admin-only user management
-- Search users by name or email
-- Paginated user list
-- View account roles and registration dates
-
-### User Interface
-- Responsive layouts
-- Admin and user dashboards
-- Loading, error, and empty states
-- Toast notifications
-- Parcel status indicators
-- Search and pagination controls
+- Role-based access for users and administrators
+- Parcel booking and tracking
+- Parcel management
+- User management for administrators
+- Password reset functionality
+- Search and filtering support
 
 ## Technology Stack
 
@@ -50,13 +32,12 @@ A courier and logistics management platform built with React, Vite, Tailwind CSS
 - React Hot Toast
 
 ### Backend
-- Python
 - FastAPI
 - SQLAlchemy
-- SQLite
+- Pydantic
 - JWT authentication
-- Password hashing
-- Pydantic validation
+- SQLite for local development
+- PostgreSQL for production database support
 
 ## Project Structure
 
@@ -64,179 +45,114 @@ A courier and logistics management platform built with React, Vite, Tailwind CSS
 courier-logistics/
 ├── backend/
 │   ├── app/
-│   │   ├── routers/
-│   │   │   ├── auth.py
-│   │   │   ├── parcels.py
-│   │   │   └── users.py
-│   │   ├── auth.py
-│   │   ├── config.py
-│   │   ├── database.py
-│   │   ├── email_utils.py
-│   │   ├── main.py
-│   │   ├── models.py
-│   │   └── schemas.py
+│   ├── .env.example
 │   ├── requirements.txt
-│   └── .env
-└── frontend/
-    ├── src/
-    │   ├── components/
-    │   ├── pages/
-    │   ├── utils/
-    │   ├── App.jsx
-    │   └── main.jsx
-    ├── package.json
-    └── vite.config.js
+│   └── create_admin.py
+├── frontend/
+│   ├── src/
+│   ├── public/
+│   └── .env.example
+└── README.md
 ```
 
-## Requirements
+## Setup and Installation
 
-Install the following before running the project:
+### Backend Setup
 
-- Python 3.10 or newer
-- Node.js and npm
-- Git (optional)
+1. Open a terminal in the `backend` directory.
+2. Create a Python virtual environment:
 
-## Installation and Setup
+   ```bash
+   python -m venv venv
+   ```
 
-### 1. Clone the Repository
+3. Activate the virtual environment.
 
-```bash
-git clone YOUR_GITHUB_REPOSITORY_URL
-cd courier-logistics
-```
+   **Windows (Git Bash):**
 
-Replace `YOUR_GITHUB_REPOSITORY_URL` with your actual repository URL.
+   ```bash
+   source venv/Scripts/activate
+   ```
 
-### 2. Set Up the Backend
+   **Windows (Command Prompt):**
 
-Open a terminal in the project root:
+   ```bash
+   venv\Scripts\activate
+   ```
 
-```bash
-cd backend
-python -m venv venv
-```
+4. Install the required dependencies:
 
-Activate the virtual environment on Windows Git Bash:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-```bash
-source venv/Scripts/activate
-```
+5. Create a `.env` file based on `.env.example`.
+6. Configure the required environment variables, including the database URL and secret key.
+7. Start the backend development server:
 
-Install the dependencies:
+   ```bash
+   uvicorn app.main:app --reload
+   ```
 
-```bash
-pip install -r requirements.txt
-```
+The backend API will be available at `http://127.0.0.1:8000`.
 
-Create a `.env` file inside the `backend` directory:
+API documentation: http://127.0.0.1:8000/docs
 
-```env
-DATABASE_URL=sqlite:///./courier.db
-SECRET_KEY=replace_with_a_long_random_secret
-ALGORITHM=HS256
-ACCESS_TOKEN_EXPIRE_MINUTES=30
+### Frontend Setup
 
-FRONTEND_URL=http://localhost:5173
+1. Open another terminal in the `frontend` directory.
+2. Install the dependencies:
 
-MAIL_USERNAME=
-MAIL_PASSWORD=
-MAIL_FROM=
-```
+   ```bash
+   npm install
+   ```
 
-**Security:** Replace the example `SECRET_KEY` with a strong, private value. Never commit your real `.env` file or email credentials to GitHub.
+3. Create a `.env` file based on `.env.example`.
+4. Configure the API base URL:
 
-Start the backend:
+   ```env
+   VITE_API_BASE_URL=http://127.0.0.1:8000
+   ```
 
-```bash
-uvicorn app.main:app --reload
-```
+   For the deployed frontend, configure the API base URL to point to the deployed backend.
 
-Backend URL:
+5. Start the frontend development server:
 
-```text
-http://127.0.0.1:8000
-```
+   ```bash
+   npm run dev
+   ```
 
-Interactive API documentation:
+The frontend will be available at http://localhost:5173.
 
-```text
-http://127.0.0.1:8000/docs
-```
+## Environment Variables
 
-### 3. Set Up the Frontend
+Refer to the following example files for configuration:
 
-Open another terminal:
+- `backend/.env.example`
+- `frontend/.env.example`
 
-```bash
-cd frontend
-npm install
-npm run dev
-```
+Use your own environment-specific values. Do not commit real `.env` files, passwords, database credentials, JWT secrets, or other sensitive information to version control.
 
-Frontend URL:
+## API Documentation
 
-```text
-http://localhost:5173
-```
+The deployed API documentation is available at:
 
-## Main API Endpoints
+https://courierconnect-logistics.onrender.com/docs
 
-| Method | Endpoint | Purpose |
-|---|---|---|
-| POST | `/auth/signup` | Register a new user |
-| POST | `/auth/login` | Log in |
-| GET | `/auth/me` | Get the current user's profile |
-| POST | `/auth/forgot-password` | Request a password reset |
-| POST | `/auth/reset-password` | Reset the password |
-| POST | `/parcels/` | Book a parcel |
-| GET | `/parcels/` | List parcels with search and filters |
-| GET | `/parcels/track/{tracking_number}` | Public parcel tracking |
-| GET | `/parcels/{parcel_id}` | Get a parcel's details |
-| PUT | `/parcels/{parcel_id}` | Update parcel information |
-| DELETE | `/parcels/{parcel_id}` | Delete a parcel (admin only) |
-| GET | `/users/` | List users (admin only) |
+Use the interactive Swagger UI to explore and test the available API endpoints.
 
-Some endpoints require a valid JWT access token and appropriate permissions.
+## Database
 
-For request schemas, query parameters, and response details, open the Swagger documentation at `/docs`.
+- **Local development:** SQLite
+- **Production deployment:** PostgreSQL
 
-## User Roles
+## Security
 
-### Regular User
-- Register and log in
-- Book parcels
-- View their own parcels
-- Search and filter their parcel list
-- Track a parcel using its tracking number
-
-### Administrator
-- View parcel records across users
-- Update parcel statuses
-- Delete parcels
-- Search and paginate users
-
-## Password Reset Email
-
-The password-reset flow requires valid SMTP email settings for email delivery.
-
-For Gmail, configure an App Password in the backend `.env` file when available. Do not use or publish your normal Gmail password. If email credentials are not configured, email delivery may fail.
-
-## Security Notes
-
-- Keep secret keys and email credentials private.
-- Do not commit `.env` files containing secrets.
-- Use a strong secret key outside development.
-- Configure production CORS origins before deployment.
-- Use HTTPS and secure deployment settings in production.
-- Do not publish administrator credentials in a public repository.
-
-## Project Links
-
-- **GitHub Repository:** Add your repository URL here.
-- **Live Frontend:** Add your deployed frontend URL here.
-- **Backend API:** Add your deployed backend URL here.
-- **API Documentation:** Add your deployed `/docs` URL here.
+- Authentication uses JWT tokens.
+- Passwords should be stored as secure hashes.
+- Role-based authorization restricts administrator-only operations.
+- Secret keys and database credentials should be stored in environment variables.
 
 ## License
 
-Add your preferred license if you plan to distribute this project publicly.
+No license has been specified yet.
