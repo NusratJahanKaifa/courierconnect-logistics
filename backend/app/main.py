@@ -9,30 +9,23 @@ from app import models
 from app.routers.auth import router as auth_router
 from app.routers.parcels import router as parcels_router
 from app.routers.users import router as users_router
-
-
 Base.metadata.create_all(bind=engine)
-
 app = FastAPI(
     title="Courier & Logistics Management Platform",
     description="API for courier and parcel management",
     version="1.0.0",
 )
-
-
 def get_allowed_origins() -> list[str]:
     origins = os.getenv(
         "FRONTEND_URL",
         "https://comforting-axolotl-d296aa.netlify.app,http://localhost:5173",
     )
-
     return [
         origin.strip().rstrip("/")
         for origin in origins.split(",")
         if origin.strip()
     ]
-
-pramr int("ALLOWED CORS ORIGINS:", get_allowed_origins())
+print("ALLOWED CORS ORIGINS:", get_allowed_origins())
 app.add_middleware(
     CORSMiddleware,
     allow_origins=get_allowed_origins(),
